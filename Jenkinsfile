@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-    MONGO_URI = "mongodb://host.docker.internal:27017/test_student_db"
+    MONGO_URI = "mongodb://mongo:27017/test_student_db"
     SECRET_KEY = "test-secret"
     }
 
