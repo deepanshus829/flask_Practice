@@ -58,9 +58,18 @@ EOF
         stage('Deploy') {
             steps {
                 sh '''
-                echo "Deploying application to staging..."
-                mkdir -p deployment
-                cp -r * deployment/
+                echo "Deploying application..."
+
+                rm -rf deployment
+                mkdir deployment
+
+                cp app.py deployment/
+                cp requirements.txt deployment/
+                cp docker-compose.yml deployment/
+                cp -r templates deployment/
+
+                echo "Deployment package created successfully."
+                ls -R deployment
                 '''
             }
         }
