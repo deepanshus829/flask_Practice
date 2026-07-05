@@ -1,3 +1,8 @@
+import os
+
+os.environ["MONGO_URI"] = "mongodb://host.docker.internal:27017/test_student_db"
+os.environ["SECRET_KEY"] = "test-secret"
+
 import pytest
 from app import app, mongo
 from bson.objectid import ObjectId
