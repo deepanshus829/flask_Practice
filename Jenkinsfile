@@ -8,6 +8,17 @@ pipeline {
 
     stages {
 
+        stage('Clean Workspace') {
+            steps {
+                sh '''
+                rm -rf deployment
+                rm -rf __pycache__
+                rm -rf .pytest_cache
+                find . -name "*.pyc" -delete
+                '''
+            }
+        }
+
         stage('Checkout') {
             steps {
                 checkout scm
