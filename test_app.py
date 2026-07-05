@@ -1,6 +1,6 @@
 import os
 
-os.environ["MONGO_URI"] = "mongodb://host.docker.internal:27017/test_student_db"
+os.environ["MONGO_URI"] = "mongodb://mongo:27017/test_student_db"
 os.environ["SECRET_KEY"] = "test-secret"
 
 import pytest
@@ -10,7 +10,6 @@ from bson.objectid import ObjectId
 @pytest.fixture
 def client():
     app.config["TESTING"] = True
-    app.config["MONGO_URI"] = "mongodb://localhost:27017/test_student_db"  # test DB
     client = app.test_client()
 
     # Setup: clear and create test data
