@@ -1,6 +1,9 @@
 import os
 
-os.environ["MONGO_URI"] = "mongodb://mongo:27017/test_student_db"
+os.environ["MONGO_URI"] = os.getenv(
+    "MONGO_URI",
+    "mongodb://mongo:27017/test_student_db"
+)
 os.environ["SECRET_KEY"] = "test-secret"
 
 import pytest

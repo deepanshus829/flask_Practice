@@ -1,9 +1,9 @@
 pipeline {
     agent any
-    
+
     environment {
-    MONGO_URI = "mongodb://mongo:27017/test_student_db"
-    SECRET_KEY = "test-secret"
+        MONGO_URI = "mongodb://mongo:27017/test_student_db"
+        SECRET_KEY = "test-secret"
     }
 
     stages {
@@ -22,6 +22,26 @@ pipeline {
                 pip install --upgrade pip
                 pip install -r requirements.txt
                 pip install pytest
+                '''
+            }
+        }
+
+        // 👇 Add this stage here
+        stage('Verify Mongo') {
+            steps {
+                sh '''
+                echo "Mongo URI = $MONGO_URI"
+
+                echo "Checking DNS..."
+                getent hosts mongo || true
+
+                python3 - <<EOF
+import socket
+try:
+    print("mongo resolves to:", socket.gethostbyname("mongo"))
+except Exception as e:
+    print("DNS Error:", e)
+EOF
                 '''
             }
         }
